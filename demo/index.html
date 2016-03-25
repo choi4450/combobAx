@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>jQuery Accessible Combobox Demo</title>
+<meta name="author" content="Gyumin Choi">
+<link rel="stylesheet" type="text/css" href="./css/demo.css">
+<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="./js/jquery.easing.1.3.min.js"></script>
+<script type="text/javascript" src="./js/jquery.accessiblecombobox.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+
+<div class="header">
+	<h1>jQuery Accessible Combobox Demo</h1>
+	<p>Created by <strong>Gyumin Choi</strong></p>
+</div>
+
+<div class="container">
+	<form action="#" method="post">
+		<h2 class="example-tit">Basic</h2>
+		<div class="example-cont">
+			<select id="f-cbo" class="example-cbo" title="Example of Use arrtibute" aria-label="Example of Use arrtibute" name="example" style="width:200px" data-accessiblecbo="">
+				<option value="A">Option A</option>
+				<option value="B">Option B</option>
+				<option value="C">Option C</option>
+				<option value="D">Option D</option>
+				<option value="E">Option E</option>
+				<option value="F">Option F</option>
+				<option value="G">Option G</option>
+				<option value="H">Option H</option>
+				<option value="I">Option I</option>
+				<option value="J">Option J</option>
+			</select>
+			<select name="example2" title="Example of Use arrtibute" aria-label="Example of Use arrtibute" style="width:200px">
+				<option value="A">Option A</option>
+				<option value="B">Option B</option>
+				<option value="C">Option C</option>
+				<option value="D">Option D</option>
+				<option value="E">Option E</option>
+				<option value="F">Option F</option>
+				<option value="G">Option G</option>
+				<option value="H">Option H</option>
+				<option value="I">Option I</option>
+				<option value="J">Option J</option>
+			</select>
+		</div>
+		<h2 class="example-tit">Option Group</h2>
+		<div class="example-cont">
+			<select id="f-cbo2" class="example-cbo example-cbo_script" title="Example of Option group" aria-label="Example of Option group" name="example3" style="width:200px">
+				<optgroup label="Group A">
+					<option value="A">Option A</option>
+					<option value="B">Option B</option>
+					<option value="C" selected>Option C</option>
+					<option value="D">Option D</option>
+					<option value="E">Option E</option>
+				</optgroup>
+				<optgroup label="Group B">
+					<option value="F">Option F</option>
+					<option value="G">Option G</option>
+					<option value="H">Option H</option>
+					<option value="I">Option I</option>
+					<option value="J">Option J</option>
+				</optgroup>
+			</select>
+			<select name="example4" title="Example of Option group" aria-label="Example of Option group" style="width:200px">
+				<optgroup label="Group A">
+					<option value="A">Option A</option>
+					<option value="B">Option B</option>
+					<option value="C" selected>Option C</option>
+					<option value="D">Option D</option>
+					<option value="E">Option E</option>
+				</optgroup>
+				<optgroup label="Group B">
+					<option value="F">Option F</option>
+					<option value="G">Option G</option>
+					<option value="H">Option H</option>
+					<option value="I">Option I</option>
+					<option value="J">Option J</option>
+				</optgroup>
+			</select>
+		</div>
+		<h2 class="example-tit">Disabled</h2>
+		<div class="example-cont">
+			<select id="f-cbo3" class="example-cbo example-cbo_script" title="Example of Disabled" aria-label="Example of Disabled" name="example5" style="width:200px" disabled>
+				<option value="A">Option A</option>
+				<option value="B">Option B</option>
+				<option value="C">Option C</option>
+				<option value="D">Option D</option>
+				<option value="E">Option E</option>
+				<option value="F">Option F</option>
+				<option value="G">Option G</option>
+				<option value="H">Option H</option>
+				<option value="I">Option I</option>
+				<option value="J" selected>Option J</option>
+			</select>
+			<select name="example6" title="Example of Disabled" aria-label="Example of Disabled" style="width:200px" disabled>
+				<option value="A">Option A</option>
+				<option value="B">Option B</option>
+				<option value="C">Option C</option>
+				<option value="D">Option D</option>
+				<option value="E">Option E</option>
+				<option value="F">Option F</option>
+				<option value="G">Option G</option>
+				<option value="H">Option H</option>
+				<option value="I">Option I</option>
+				<option value="J" selected>Option J</option>
+			</select>
+		</div>
+		<div class="example-btn">
+			<button type="submit" style="padding:4px;border:1px solid #aaa;background:#ddd">Submit</button>
+			<?= $_POST ? 'Result: '.$_POST['example'].', '.$_POST['example2'].', '.$_POST['example3'].', '.$_POST['example4'].', '.$_POST['example5'].', '.$_POST['example6'] : '' ?>
+		</div>
+	</form>
+</div>
+
+</div>
+
+<script>
+$(function() {
+	setTimeout(function() {
+		$('.example-cbo_script').each(function() {
+			$(this).accessibleCombobox();
+		});
+	}, 0);
+});
+</script>
+
+</body>
+</html>
