@@ -1,10 +1,10 @@
 /**
  * combobAx v0.1.2
- * https://github.com/choi4450/combobax
+ * https://github.com/choi4450/combobAx
  *
  * Copyright 2015 Gyumin Choi Foundation and other contributors
  * Released under the MIT license
- * https://github.com/choi4450/combobax/blob/master/LICENSE.txt
+ * https://github.com/choi4450/combobAx/blob/master/LICENSE.txt
  */
 
 (function($) {

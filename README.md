@@ -7,11 +7,11 @@
 
 ## 데모
 
-<a target="_blank" href="http://www.choigyumin.com/_view/combobax/">http:&#47;&#47;www.choigyumin.com&#47;_view&#47;combobax&#47;</a>
+<a target="_blank" href="http://www.choigyumin.com/_view/combobAx/">http:&#47;&#47;www.choigyumin.com&#47;_view&#47;combobAx&#47;</a>
 
 ## 다운로드
 
-<a target="_blank" href="https://github.com/choi4450/combobax/tree/master/dist">https:&#47;&#47;github.com&#47;choi4450&#47;combobax&#47;tree&#47;master&#47;dist</a>
+<a target="_blank" href="https://github.com/choi4450/combobAx/tree/master/dist">https:&#47;&#47;github.com&#47;choi4450&#47;combobAx&#47;tree&#47;master&#47;dist</a>
 
 ## 기능
 
