@@ -1,17 +1,17 @@
-# jQuery Accessible combobox plugin
+# combobAx
 
-웹접근성을 준수하며, 폼 컨트롤이 가능한 제이쿼리 콤보박스(셀렉트박스) 플러그인
+> 모든 사용자를 위한 제이쿼리 커스텀 콤보박스 플러그인
 
-- Current version: 0.1.1
-- Release: 2016. 04. 04
+- Current version: 0.1.2
+- Release: 2016. 08. 04 ~
 
 ## 데모
 
-<a target="_blank" href="http://www.choigyumin.com/_view/jquery.accessiblecombobox/">http:&#47;&#47;www.choigyumin.com&#47;_view&#47;jquery.accessiblecombobox&#47;</a>
+<a target="_blank" href="http://www.choigyumin.com/_view/combobax/">http:&#47;&#47;www.choigyumin.com&#47;_view&#47;combobax&#47;</a>
 
 ## 다운로드
 
-<a target="_blank" href="https://github.com/choi4450/jquery.accessiblecombobox/tree/master/dist">https:&#47;&#47;github.com&#47;choi4450&#47;jquery.accessiblecombobox&#47;tree&#47;master&#47;dist</a>
+<a target="_blank" href="https://github.com/choi4450/combobax/tree/master/dist">https:&#47;&#47;github.com&#47;choi4450&#47;combobax&#47;tree&#47;master&#47;dist</a>
 
 ## 기능
 
@@ -28,7 +28,7 @@
 #### HTML
 
 ```html
-<select id="f-cbo" name="example" title="Example" aria-label="Example" style="width:250px" class="example" data-accessiblecbo="label: '다른 옵션 선택'">
+<select id="f-cbo" name="example" title="Example" aria-label="Example" style="width:250px" class="example" data-combobax="label: '다른 옵션 선택'">
     <option value="A">Option A</option>
     <option value="B">Option B</option>
     <option value="C">Option C</option>
@@ -39,13 +39,13 @@
 
 ```javascript
 $('.example').each(function() {
-    $(this).accessibleCombobox({
+    $(this).combobAx({
         label: '다른 옵션 선택'
     });
 });
 
 // or
-$('.example').accessibleCombobox({
+$('.example').combobAx({
     label: '다른 옵션 선택'
 });
 ```
@@ -70,9 +70,9 @@ $('.example').accessibleCombobox({
 ```
 
 ```html
-<a href="#" class="accessiblecbo-btn" role="button" aria-live="off" title="Example" aria-label="다른 옵션 선택">
-    <span class="accessiblecbo-btn-txt">Option A</span>
-    <span class="accessiblecbo-btn-bu" aria-hidden="true"></span>
+<a href="#" class="combobax-btn" role="button" aria-live="off" title="Example" aria-label="다른 옵션 선택">
+    <span class="combobax-btn-txt">Option A</span>
+    <span class="combobax-btn-bu" aria-hidden="true"></span>
 </a>
 ```
 
@@ -87,9 +87,9 @@ $('.example').accessibleCombobox({
 ```
 
 ```html
-<a href="#" class="accessiblecbo-btn" role="button" aria-live="off" title="Example" aria-label="Select another option">
-    <span class="accessiblecbo-btn-txt">Option A</span>
-    <span class="accessiblecbo-btn-bu" aria-hidden="true"><small>▼</small></span>
+<a href="#" class="combobax-btn" role="button" aria-live="off" title="Example" aria-label="Select another option">
+    <span class="combobax-btn-txt">Option A</span>
+    <span class="combobax-btn-bu" aria-hidden="true"><small>▼</small></span>
 </a>
 ```
 

@@ -1,15 +1,15 @@
 /**
- * jQuery Accessible combobox v0.1.1
- * https://github.com/choi4450/jquery.accessiblecombobox
+ * combobAx v0.1.2
+ * https://github.com/choi4450/combobax
  *
  * Copyright 2015 Gyumin Choi Foundation and other contributors
  * Released under the MIT license
- * https://github.com/choi4450/jquery.accessiblecombobox/blob/master/LICENSE.txt
+ * https://github.com/choi4450/combobax/blob/master/LICENSE.txt
  */
 
 (function($) {
 
-	$.fn.accessibleComboboxConfig = {
+	$.fn.combobAxConfig = {
 		//style: null,
 		//animate: false,
 		//duration: 0,
@@ -19,13 +19,13 @@
 		bullet: ''
 	};
 
-	$.fn.accessibleCombobox = function(defaults) {
+	$.fn.combobAx = function(defaults) {
 
 		if (navigator.userAgent.indexOf("MSIE 6") >= 0) return false;
 
 		function init(el) {
 
-			var config = $.extend({}, $.fn.accessibleComboboxConfig, defaults),
+			var config = $.extend({}, $.fn.combobAxConfig, defaults),
 				fn = {},
 				dom = {};
 
@@ -43,7 +43,7 @@
 			fn.replaceCbo = function() {
 
 				var attrGroup = {};
-				attrGroup.boxSelector = 'class="' + config.elClass + ' accessiblecbo';
+				attrGroup.boxSelector = 'class="' + config.elClass + ' combobax';
 				attrGroup.boxSelector += config.propDisabled ? ' is-disabled"' : '"';
 				attrGroup.boxSelector += config.elId != '' ? ' id="' + config.elId + '"' : '';
 				attrGroup.btnTitle = config.elTitle != '' ? 'title="' + config.elTitle + '"' : '';
@@ -55,8 +55,8 @@
 				attrGroup.optDisabled = config.propDisabled ? 'disabled="disabled"' : '';
 
 				var addOptionHtmlStr = function(element) {
-					var returnHtmlStr = '';
-					element.each(function(_i) {
+					var ret = '';
+					element.each(function() {
 						var $this = $(this),
 							thisAttrVal = $this.val() ? 'value="' + $this.val() + '"' : '',
 							selectedClass = '',
@@ -74,32 +74,32 @@
 							disabledAttr = 'disabled="disabled"';
 						}
 
-						returnHtmlStr +=
-							'<label class="accessiblecbo-opt' + selectedClass + ' ' + disabledClass + '">' +
-							'<input type="radio" class="accessiblecbo-opt-radio" ' + attrGroup.optName + ' ' + thisAttrVal + ' ' + attrGroup.optDisabled + ' ' + attrGroup.optRequired + ' ' + selectedAttr + ' ' + disabledAttr + '>' +
-							'<span class="accessiblecbo-opt-txt">' + $this.text() + '</span>' +
+						ret +=
+							'<label class="combobax-opt' + selectedClass + ' ' + disabledClass + '">' +
+							'<input type="radio" class="combobax-opt-radio" ' + attrGroup.optName + ' ' + thisAttrVal + ' ' + attrGroup.optDisabled + ' ' + attrGroup.optRequired + ' ' + selectedAttr + ' ' + disabledAttr + '>' +
+							'<span class="combobax-opt-txt">' + $this.text() + '</span>' +
 							'</label>';
 					});
 
-					return returnHtmlStr;
+					return ret;
 				};
 
 				var replaceHtmlStr =
 					'<span ' + attrGroup.boxSelector + ' role="menu" aria-live="polite" aria-relevant="all" aria-haspopup="true" aria-expanded="false" style="width: ' + config.elWidth + 'px;" ' + attrGroup.btnDisabled + ' ' + attrGroup.boxRequired + '>' +
-					'<a href="#" class="accessiblecbo-btn" role="button" aria-live="off" ' + attrGroup.btnTitle + ' ' + attrGroup.btnLabel + ' ' + attrGroup.btnDisabled + '>' +
-					'<span class="accessiblecbo-btn-txt">' + config.selectedOptTxt + '</span>' +
-					'<span class="accessiblecbo-btn-bu" aria-hidden="true">' + config.bullet + '</span>' +
-					'</a>' +
-					'<span class="accessiblecbo-listbox">' +
-					'<span class="accessiblecbo-listbox-wrapper" role="radiogroup" ' + attrGroup.boxRequired + ' aria-hidden="true"  style="display: none;">';
+					'<button type="button" class="combobax-btn" aria-live="off" ' + attrGroup.btnTitle + ' ' + attrGroup.btnLabel + ' ' + attrGroup.btnDisabled + '>' +
+					'<span class="combobax-btn-txt">' + config.selectedOptTxt + '</span>' +
+					'<span class="combobax-btn-bu" aria-hidden="true">' + config.bullet + '</span>' +
+					'</button>' +
+					'<span class="combobax-listbox">' +
+					'<span class="combobax-listbox-wrapper" role="radiogroup" ' + attrGroup.boxRequired + ' aria-hidden="true"  style="display: none;">';
 
-				dom.cbo.find('>*').each(function(_i) {
+				dom.cbo.find('>*').each(function() {
 					var $this = $(this);
 
 					if ($this.is('optgroup')) {
 						replaceHtmlStr +=
-							'<span class="accessiblecbo-optgroup" role="radiogroup">' +
-							'<em class="accessiblecbo-optgroup-tit">' + $this.attr('label') + '</em>' +
+							'<span class="combobax-optgroup" role="radiogroup">' +
+							'<em class="combobax-optgroup-tit">' + $this.attr('label') + '</em>' +
 							addOptionHtmlStr($this.find('option')) +
 							'</span>';
 					} else {
@@ -117,14 +117,14 @@
 				dom.cbo.replaceWith(replaceHtml);
 
 				dom.cbo = replaceHtml;
-				dom.cboBtn = dom.cbo.find('.accessiblecbo-btn');
-				dom.cboBtnTxt = dom.cboBtn.find('.accessiblecbo-btn-txt');
-				dom.cboListbox = dom.cbo.find('.accessiblecbo-listbox');
-				dom.cboListboxWrapper = dom.cboListbox.find('.accessiblecbo-listbox-wrapper');
-				dom.cboOpt = dom.cboListbox.find('.accessiblecbo-opt');
+				dom.cboBtn = dom.cbo.find('.combobax-btn');
+				dom.cboBtnTxt = dom.cboBtn.find('.combobax-btn-txt');
+				dom.cboListbox = dom.cbo.find('.combobax-listbox');
+				dom.cboListboxWrapper = dom.cboListbox.find('.combobax-listbox-wrapper');
+				dom.cboOpt = dom.cboListbox.find('.combobax-opt');
 				dom.cboOptEbabled = dom.cboOpt.not('.is-disabled');
-				dom.cboOptRadio = dom.cboOpt.find('.accessiblecbo-opt-radio');
-				dom.cboOptRadioEbabled = dom.cboOptEbabled.find('.accessiblecbo-opt-radio');
+				dom.cboOptRadio = dom.cboOpt.find('.combobax-opt-radio');
+				dom.cboOptRadioEbabled = dom.cboOptEbabled.find('.combobax-opt-radio');
 
 			};
 
@@ -149,20 +149,20 @@
 				if (returnBoolChkAction('open') && propExpanded === false) {
 					setOpenExpanded();
 					setTimeout(function() {
-						$(document).one('click.accessibleCbo-closeExpanded', function(e) {
+						$(document).one('click.combobAx-closeExpanded', function(e) {
 							if (dom.cbo.has(e.target).length < 1) setCloseExpanded();
 						});
 					}, 0);
 				} else if (returnBoolChkAction('close') && propExpanded === true) {
 					setCloseExpanded();
-					$(document).off('.accessibleCbo-closeExpanded');
+					$(document).off('.combobAx-closeExpanded');
 				}
 
 			};
 
 			fn.activeOpt = function(el, changeBool) {
 				var thisOpt = el,
-					thisOptRadio = thisOpt.find('.accessiblecbo-opt-radio');
+					thisOptRadio = thisOpt.find('.combobax-opt-radio');
 
 				if (typeof changeBool == 'undefined') changeBool = true;
 
@@ -171,7 +171,7 @@
 
 				if (changeBool == true) {
 					thisOptRadio.focus().prop('checked', true);
-					dom.cboBtnTxt.text(thisOptRadio.siblings('.accessiblecbo-opt-txt').text());
+					dom.cboBtnTxt.text(thisOptRadio.siblings('.combobax-opt-txt').text());
 				}
 			};
 
@@ -207,7 +207,7 @@
 				} else if (e.which >= 37 && e.which <= 40) {
 					e.preventDefault();
 
-					var thisOpt = $this.parent('.accessiblecbo-opt'),
+					var thisOpt = $this.parent('.combobax-opt'),
 						thisOptIdx = dom.cboOptEbabled.index(thisOpt),
 						controlsOpt,
 						allOptLen = dom.cboOptEbabled.length,
@@ -246,11 +246,11 @@
 	};
 
 	$(function() {
-		$('select[data-accessiblecbo]').each(function() {
+		$('select[data-combobax]').each(function() {
 			var $this = $(this),
-				argumentStr = $this.attr('data-accessiblecbo'),
+				argumentStr = $this.attr('data-combobax'),
 				argumentObj = eval('({' + argumentStr + '})');
-			$this.accessibleCombobox(argumentObj);
+			$this.combobAx(argumentObj);
 		});
 	});
 

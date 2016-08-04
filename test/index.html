@@ -2,26 +2,85 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>jQuery Accessible Combobox Demo</title>
+<title>combobAx Demo</title>
 <meta name="author" content="Gyumin Choi">
 <link rel="stylesheet" type="text/css" href="./css/demo.css">
 <script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="./js/jquery.easing.1.3.min.js"></script>
-<script type="text/javascript" src="./js/jquery.accessiblecombobox-latest.js"></script>
+<script type="text/javascript" src="./js/jquery.combobax-latest.js"></script>
 </head>
 <body>
+
+<p role="alert">아래 구조로 개편할 예정</p>
+<span class="combobax"> <!-- .combobax--expanded -->
+	<button class="combobax__trigger" type="button" aria-controls="field-combobax" aria-expanded="false" title="Select another option" aria-label="Select another option" value="A">
+		<span class="combobax__trigger-txt" role="presentation">Option A</span>
+		<!--{{combobax__trigger-markup}}-->
+	</button>
+	<span class="combobax__listbox" role="group" aria-label="Options" id="field-combobax" aria-hidden="true">
+		<span class="combobax__group" role="radiogroup" aria-label="Optgroup 1">
+			<em class="combobax__group-label" role="presentation">Optgroup 1</em>
+			<label class="combobax__item combobax__item--selected"> <!-- .combobax__item--selected -->
+				<input class="combobax__item-option" type="radio" name="field-combobax" value="A" checked required>
+				<span class="combobax__item-txt" role="presentation">Option A</span>
+				<!--{{combobax__item-markup}}-->
+			</label>
+			<label class="combobax__item">
+				<input class="combobax__item-option" type="radio" name="field-combobax" value="B">
+				<span class="combobax__item-txt" role="presentation">Option B</span>
+				<!--{{combobax__item-markup}}-->
+			</label>
+			<label class="combobax__item">
+				<input class="combobax__item-option" type="radio" name="field-combobax" value="C">
+				<span class="combobax__item-txt" role="presentation">Option C</span>
+				<!--{{combobax__item-markup}}-->
+			</label>
+		</span>
+		<span class="combobax__group" role="radiogroup" aria-label="Optgroup 2">
+			<em class="combobax__group-label" role="presentation">Optgroup 2</em>
+			<label class="combobax__item">
+				<input class="combobax__item-option" type="radio" name="field-combobax" value="D">
+				<span class="combobax__item-txt" role="presentation">Option D</span>
+				<!--{{combobax__item-markup}}-->
+			</label>
+			<label class="combobax__item">
+				<input class="combobax__item-option" type="radio" name="field-combobax" value="E">
+				<span class="combobax__item-txt" role="presentation">Option E</span>
+				<!--{{combobax__item-markup}}-->
+			</label>
+			<label class="combobax__item">
+				<input class="combobax__item-option" type="radio" name="field-combobax" value="F">
+				<span class="combobax__item-txt" role="presentation">Option F</span>
+				<!--{{combobax__item-markup}}-->
+			</label>
+		</span>
+	</span>
+</span>
+<script>
+	$('.combobax__item-option').on('change', function() {
+		var $this = $(this),
+			$thisTxt = $this.siblings('.combobax__item-txt'),
+			trigger = $('.combobax__trigger'),
+			triggerTxt = trigger.find('.combobax__trigger-txt');
+		trigger.val($this.val());
+		triggerTxt.text($thisTxt.text());
+		console.log('value:', trigger.val());
+		console.log('text:', triggerTxt.text());
+	});
+</script>
+
 <div id="wrapper">
 
 <div class="header">
-	<h1><span class="show_ib">jQuery Accessible</span> <span class="show_ib">Combobox Demo</span></h1>
+	<h1>combob<mark style="font-size: 1.5em;">A</mark>x</h1>
 	<p>Created by <strong>Gyumin Choi</strong></p>
 </div>
 
 <div class="container">
-	<form action="" method="post">
+	<form action="./" method="post">
 		<h2>Basic</h2>
 
-		<h3>Default</h3>
+		<h3>&lt;Select&gt; tag</h3>
 		<select id="f-cbo1" name="example-basic_default" title="Example of Use attribute" aria-label="Example of Use attribute" style="width:250px">
 			<option value="A">Option A</option>
 			<option value="B">Option B</option>
@@ -35,8 +94,8 @@
 			<option value="J">Option J</option>
 		</select>
 
-		<h3>Custom</h3>
-		<select id="f-cbo2" name="example-basic_custom" title="Example of Use attribute" aria-label="Example of Use attribute" style="width:250px" class="example-cbo" data-accessiblecbo="bullet: '▼'">
+		<h3>with <strong>combobAx</strong></h3>
+		<select id="f-cbo2" name="example-basic_custom" title="Example of Use attribute" aria-label="Example of Use attribute" style="width:250px" class="example-cbo" data-combobax="bullet: '▼'">
 			<option value="A">Option A</option>
 			<option value="B">Option B</option>
 			<option value="C">Option C</option>
@@ -51,7 +110,7 @@
 
 		<h2>Option Group</h2>
 
-		<h3>Default</h3>
+		<h3>&lt;Select&gt; tag</h3>
 		<select id="f-cbo3" name="example-optgroup_default" title="Example of Option group" aria-label="Example of Option group" style="width:250px">
 			<optgroup label="Group A">
 				<option value="A">Option A</option>
@@ -69,7 +128,7 @@
 			</optgroup>
 		</select>
 
-		<h3>Custom</h3>
+		<h3>with <strong>combobAx</strong></h3>
 		<select id="f-cbo4" name="example-optgroup_custom" title="Example of Option group" aria-label="Example of Option group" style="width:250px" class="example-cbo_script">
 			<optgroup label="Group A">
 				<option value="A">Option A</option>
@@ -89,7 +148,7 @@
 
 		<h2>Disabled</h2>
 
-		<h3>Default</h3>
+		<h3>&lt;Select&gt; tag</h3>
 		<select id="f-cbo5" name="example-disabled_default" title="Example of Disabled" aria-label="Example of Disabled" style="width:250px" disabled>
 			<option value="A">Option A</option>
 			<option value="B">Option B</option>
@@ -103,7 +162,7 @@
 			<option value="J" selected>Option J</option>
 		</select>
 
-		<h3>Custom</h3>
+		<h3>with <strong>combobAx</strong></h3>
 		<select id="f-cbo6" name="example-disabled_custom" title="Example of Disabled" aria-label="Example of Disabled" style="width:250px" disabled class="example-cbo_script">
 			<option value="A">Option A</option>
 			<option value="B">Option B</option>
@@ -130,7 +189,7 @@
 </div>
 
 <script>
-	$('.example-cbo_script').accessibleCombobox({
+	$('.example-cbo_script').combobAx({
 		bullet: '▼'
 	});
 </script>
