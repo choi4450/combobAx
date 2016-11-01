@@ -1,138 +1,136 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<title>jQuery Accessible Combobox Demo</title>
-<meta name="author" content="Gyumin Choi">
-<link rel="stylesheet" type="text/css" href="./css/demo.css">
-<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="./js/jquery.easing.1.3.min.js"></script>
-<script type="text/javascript" src="./js/jquery.accessiblecombobox-latest.min.js"></script>
+	<meta charset="utf-8">
+	<title>combobAx Demo</title>
+	<meta name="author" content="Gyumin Choi">
+	<link rel="stylesheet" type="text/css" href="css/demo.css">
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="js/jquery.combobax-latest.min.js"></script>
 </head>
 <body>
+
 <div id="wrapper">
 
-<div class="header">
-	<h1><span class="show_ib">jQuery Accessible</span> <span class="show_ib">Combobox Demo</span></h1>
-	<p>Created by <strong>Gyumin Choi</strong></p>
-</div>
+	<div class="header">
+		<h1>combob<mark style="font-size: 1.5em;">A</mark>x</h1>
+		<p><a href="https://github.com/choi4450/combobAx">https://github.com/choi4450/combobAx</a></p>
+	</div>
 
-<div class="container">
-	<form action="" method="post">
-		<h2>Basic</h2>
+	<div class="container">
+		<form method="get">
+			<h2>Basic</h2>
 
-		<h3>Default</h3>
-		<select id="f-cbo1" name="example-basic_default" title="Example of Use attribute" aria-label="Example of Use attribute" style="width:250px">
-			<option value="A">Option A</option>
-			<option value="B">Option B</option>
-			<option value="C">Option C</option>
-			<option value="D">Option D</option>
-			<option value="E">Option E</option>
-			<option value="F" disabled>Option F</option>
-			<option value="G">Option G</option>
-			<option value="H">Option H</option>
-			<option value="I">Option I</option>
-			<option value="J">Option J</option>
-		</select>
-
-		<h3>Custom</h3>
-		<select id="f-cbo2" name="example-basic_custom" title="Example of Use attribute" aria-label="Example of Use attribute" style="width:250px" class="example-cbo" data-accessiblecbo="bullet: '▼'">
-			<option value="A">Option A</option>
-			<option value="B">Option B</option>
-			<option value="C">Option C</option>
-			<option value="D">Option D</option>
-			<option value="E">Option E</option>
-			<option value="F" disabled>Option F</option>
-			<option value="G">Option G</option>
-			<option value="H">Option H</option>
-			<option value="I">Option I</option>
-			<option value="J">Option J</option>
-		</select>
-
-		<h2>Option Group</h2>
-
-		<h3>Default</h3>
-		<select id="f-cbo3" name="example-optgroup_default" title="Example of Option group" aria-label="Example of Option group" style="width:250px">
-			<optgroup label="Group A">
+			<h3>&lt;Select&gt; tag</h3>
+			<select id="f-cbo1" name="example-basic-system" title="Example of Use attribute" aria-label="Example of Use attribute" style="width:250px">
 				<option value="A">Option A</option>
 				<option value="B">Option B</option>
-				<option value="C" selected>Option C</option>
+				<option value="C">Option C</option>
 				<option value="D">Option D</option>
 				<option value="E">Option E</option>
-			</optgroup>
-			<optgroup label="Group B">
 				<option value="F" disabled>Option F</option>
 				<option value="G">Option G</option>
 				<option value="H">Option H</option>
 				<option value="I">Option I</option>
 				<option value="J">Option J</option>
-			</optgroup>
-		</select>
+			</select>
 
-		<h3>Custom</h3>
-		<select id="f-cbo4" name="example-optgroup_custom" title="Example of Option group" aria-label="Example of Option group" style="width:250px" class="example-cbo_script">
-			<optgroup label="Group A">
+			<h3>with <strong>combobAx</strong></h3>
+			<select class="cbo-example" id="f-cbo2" name="example-basic-custom" title="Example of Use attribute" aria-label="Example of Use attribute" style="width:250px" data-combobax>
 				<option value="A">Option A</option>
 				<option value="B">Option B</option>
-				<option value="C" selected>Option C</option>
+				<option value="C">Option C</option>
 				<option value="D">Option D</option>
 				<option value="E">Option E</option>
-			</optgroup>
-			<optgroup label="Group B">
 				<option value="F" disabled>Option F</option>
 				<option value="G">Option G</option>
 				<option value="H">Option H</option>
 				<option value="I">Option I</option>
 				<option value="J">Option J</option>
-			</optgroup>
-		</select>
+			</select>
 
-		<h2>Disabled</h2>
+			<h2>Option Group</h2>
 
-		<h3>Default</h3>
-		<select id="f-cbo5" name="example-disabled_default" title="Example of Disabled" aria-label="Example of Disabled" style="width:250px" disabled>
-			<option value="A">Option A</option>
-			<option value="B">Option B</option>
-			<option value="C">Option C</option>
-			<option value="D">Option D</option>
-			<option value="E">Option E</option>
-			<option value="F">Option F</option>
-			<option value="G">Option G</option>
-			<option value="H">Option H</option>
-			<option value="I">Option I</option>
-			<option value="J" selected>Option J</option>
-		</select>
+			<h3>&lt;Select&gt; tag</h3>
+			<select id="f-cbo3" name="example-optgroup-system" title="Example of Option group" aria-label="Example of Option group" style="width:250px">
+				<optgroup label="Group A">
+					<option value="A">Option A</option>
+					<option value="B">Option B</option>
+					<option value="C" selected>Option C</option>
+					<option value="D">Option D</option>
+					<option value="E">Option E</option>
+				</optgroup>
+				<optgroup label="Group B">
+					<option value="F" disabled>Option F</option>
+					<option value="G">Option G</option>
+					<option value="H">Option H</option>
+					<option value="I">Option I</option>
+					<option value="J">Option J</option>
+				</optgroup>
+			</select>
 
-		<h3>Custom</h3>
-		<select id="f-cbo6" name="example-disabled_custom" title="Example of Disabled" aria-label="Example of Disabled" style="width:250px" disabled class="example-cbo_script">
-			<option value="A">Option A</option>
-			<option value="B">Option B</option>
-			<option value="C">Option C</option>
-			<option value="D">Option D</option>
-			<option value="E">Option E</option>
-			<option value="F">Option F</option>
-			<option value="G">Option G</option>
-			<option value="H">Option H</option>
-			<option value="I">Option I</option>
-			<option value="J" selected>Option J</option>
-		</select>
+			<h3>with <strong>combobAx</strong></h3>
+			<select class="cbo-example-script" id="f-cbo4" name="example-optgroup-custom" title="Example of Option group" aria-label="Example of Option group" style="width:250px">
+				<optgroup label="Group A">
+					<option value="A">Option A</option>
+					<option value="B">Option B</option>
+					<option value="C" selected>Option C</option>
+					<option value="D">Option D</option>
+					<option value="E">Option E</option>
+				</optgroup>
+				<optgroup label="Group B">
+					<option value="F" disabled>Option F</option>
+					<option value="G">Option G</option>
+					<option value="H">Option H</option>
+					<option value="I">Option I</option>
+					<option value="J">Option J</option>
+				</optgroup>
+			</select>
 
-		<?php
-		if ($_POST) {
-			echo "<p style=\"margin: 20px 0;font-size: 14px;\">Result: ['{$_POST['example-basic_default']}', '{$_POST['example-basic_custom']}', '{$_POST['example-optgroup_default']}', '{$_POST['example-optgroup_custom']}', '{$_POST['example-disabled_default']}', '{$_POST['example-disabled_custom']}']</p>";
-		}
-		?>
+			<h2>Disabled</h2>
 
-		<button type="submit" class="button">Submit</button>
-	</form>
-</div>
+			<h3>&lt;Select&gt; tag</h3>
+			<select id="f-cbo5" name="example-disabled-default" title="Example of Disabled" aria-label="Example of Disabled" style="width:250px" disabled>
+				<option value="A">Option A</option>
+				<option value="B">Option B</option>
+				<option value="C">Option C</option>
+				<option value="D">Option D</option>
+				<option value="E">Option E</option>
+				<option value="F">Option F</option>
+				<option value="G">Option G</option>
+				<option value="H">Option H</option>
+				<option value="I">Option I</option>
+				<option value="J" selected>Option J</option>
+			</select>
+
+			<h3>with <strong>combobAx</strong></h3>
+			<select class="cbo-example-script" id="f-cbo6" name="example-disabled-custom" title="Example of Disabled" aria-label="Example of Disabled" style="width:250px" disabled>
+				<option value="A">Option A</option>
+				<option value="B">Option B</option>
+				<option value="C">Option C</option>
+				<option value="D">Option D</option>
+				<option value="E">Option E</option>
+				<option value="F">Option F</option>
+				<option value="G">Option G</option>
+				<option value="H">Option H</option>
+				<option value="I">Option I</option>
+				<option value="J" selected>Option J</option>
+			</select>
+
+			<?php
+			if ($_GET) {
+			echo "<p style=\"margin: 20px 0;font-size: 14px;\">Result: ['{$_GET['example-basic-system']}', '{$_GET['example-basic-custom']}', '{$_GET['example-optgroup-system']}', '{$_GET['example-optgroup-custom']}', '{$_GET['example-disabled-default']}', '{$_GET['example-disabled-custom']}']</p>";
+			}
+			?>
+
+			<button type="submit" class="button">Submit</button>
+		</form>
+	</div>
 
 </div>
 
 <script>
-	$('.example-cbo_script').accessibleCombobox({
-		bullet: '▼'
-	});
+	$('.cbo-example-script').combobAx();
 </script>
 
 </body>
