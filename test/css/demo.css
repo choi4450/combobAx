@@ -4,18 +4,16 @@ article, aside, details, figcaption, figure, footer, header, main, menu, nav, se
 	display: block
 }
 
-html, body {
-	height: 100%
-}
-
 html {
 	overflow-y: scroll;
-	font-family: 'FONTNAME', 'wf-FONTNAME', '맑은 고딕', 'Malgun Gothic', '돋움', Dotum, '굴림', Gulim, Helvetica, sans-serif;
+	height: 100%;
+	font-family: Helvetica, '맑은 고딕', 'Malgun Gothic', '돋움', Dotum, '굴림', Gulim, sans-serif;
 	font-size: 12px;
 	line-height: 1.2
 }
 
 body {
+	position: relative;
 	background: #f4f4f4;
 	color: #333;
 	-webkit-text-size-adjust: none
@@ -95,6 +93,10 @@ button, input[type='button'], input[type='submit'], input[type='reset'], input[t
 	cursor: pointer
 }
 
+input[type='file']::-webkit-file-upload-button {
+	cursor: pointer
+}
+
 textarea {
 	overflow: hidden;
 	overflow-y: auto
@@ -114,7 +116,8 @@ fieldset {
 
 table {
 	border-collapse: collapse;
-	border-spacing: 0
+	border-spacing: 0;
+	word-break: break-all
 }
 
 #wrapper {
