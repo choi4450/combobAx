@@ -119,7 +119,7 @@
 
 				var replaceHtmlStr =
 					'<span ' + attrObj.box.classname + ' style="width: ' + config.style.width + 'px;">' +
-					'<button class="combobax__trigger" ' + attrObj.trigger.id + ' type="button" aria-controls="COMBOBAX' + pluginCount + '" ' + attrObj.trigger.title + ' ' + attrObj.trigger.label + ' ' + attrObj.trigger.disabled + ' aria-expanded="false" ' + attrObj.opt.disabled + ' value="A">' +
+					'<button class="combobax__trigger" ' + attrObj.trigger.id + ' type="button" aria-controls="COMBOBAX' + pluginCount + '" ' + attrObj.trigger.title + ' ' + attrObj.trigger.label + ' ' + attrObj.trigger.disabled + ' aria-expanded="false" ' + attrObj.opt.disabled + '>' +
 					'<span class="combobax__trigger-txt">' + config.selected.txt + '</span>' +
 					'<span class="combobax__trigger-bu" aria-hidden="true">' + config.bullet + '</span>' +
 					'</button>' +
