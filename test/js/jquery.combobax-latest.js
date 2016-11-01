@@ -9,6 +9,8 @@
 
 (function ($) {
 
+	$.fn.combobAxConut = 0;
+
 	$.fn.combobAxConfig = {
 		label: 'Select another option',
 		bullet: '▼',
@@ -24,7 +26,10 @@
 
 			var dom = {},
 				fn = {},
-				config = $.extend({}, $.fn.combobAxConfig, defaults);
+				config = $.extend({}, $.fn.combobAxConfig, defaults),
+				pluginCount = $.fn.combobAxConut;
+
+			$.fn.combobAxConut++;
 
 			dom.cbo = $(el);
 			config.attr = config.prop = config.style = config.selected = {};
@@ -84,6 +89,7 @@
 			// };
 
 			fn.replaceCbo = function () {
+
 				var attrObj = {};
 				attrObj.box = {};
 				attrObj.box.classname = 'class="combobax';	// attrObj.box.classname = fn.setAttrInHtmlStr('class', 'combobax');
@@ -99,9 +105,9 @@
 				attrObj.opt.required = config.prop.required ? 'required' : '';
 				attrObj.opt.disabled = config.prop.disabled ? 'disabled' : '';
 
-				var addOptionHtmlStr = function (element) {
+				var addOptHtmlStr = function (els) {
 					var ret = '';
-					element.each(function () {
+					els.each(function () {
 						var $this = $(this),
 							itemClassname = '',
 							optAttr = $this.val() ? 'value="' + $this.val() + '"' : '';
@@ -128,11 +134,11 @@
 
 				var replaceHtmlStr =
 					'<span ' + attrObj.box.classname + ' style="width: ' + config.style.width + 'px;">' +
-					'<button class="combobax__trigger" ' + attrObj.trigger.id + ' type="button" aria-controls="@@@@@@@@@@" ' + attrObj.trigger.title + ' ' + attrObj.trigger.label + ' ' + attrObj.trigger.disabled + ' aria-expanded="false" ' + attrObj.opt.disabled + ' value="A">' +
+					'<button class="combobax__trigger" ' + attrObj.trigger.id + ' type="button" aria-controls="COMBOBAX' + pluginCount + '" ' + attrObj.trigger.title + ' ' + attrObj.trigger.label + ' ' + attrObj.trigger.disabled + ' aria-expanded="false" ' + attrObj.opt.disabled + ' value="A">' +
 					'<span class="combobax__trigger-txt">' + config.selected.txt + '</span>' +
 					'<span class="combobax__trigger-bu" aria-hidden="true">' + config.bullet + '</span>' +
 					'</button>' +
-					'<span class="combobax__listbox" role="group" aria-label="Options" id="@@@@@@@@@@" aria-hidden="true"' + (config.animateType !== 'css' ? ' style="display: none;"' : '') + '>';
+					'<span class="combobax__listbox" role="group" aria-label="Options" id="COMBOBAX' + pluginCount + '" aria-hidden="true"' + (config.animateType !== 'css' ? ' style="display: none;"' : '') + '>';
 
 				dom.cbo.find('>*').each(function () {
 					var $this = $(this);
@@ -141,11 +147,11 @@
 						replaceHtmlStr +=
 							'<span class="combobax__group" role="group" aria-label="' + $this.attr('label') + '">' +
 							'<span class="combobax__group-label" aria-hidden="true">' + $this.attr('label') + '</span>' +
-							addOptionHtmlStr($this.find('option')) +
+							addOptHtmlStr($this.find('option')) +
 							'</span>';
 					} else {
 						replaceHtmlStr +=
-							addOptionHtmlStr($this);
+							addOptHtmlStr($this);
 					}
 				});
 
@@ -167,7 +173,7 @@
 
 			};
 
-			fn.toggleExpandCbo = function (action) {
+			fn.toggleExpandedCbo = function (action) {
 
 				if (typeof action == 'undefined') action = 'toggle';
 
@@ -187,8 +193,10 @@
 										dom.listbox.clearQueue().fadeIn(config.animateDuration);
 										break;
 								}
+								setTimeout(function () {
+									dom.optsEnabled.filter(':checked').focus();
+								}, 0);
 							}, 0);
-							dom.opts.filter(':checked').focus();
 						}, 0);
 					},
 					setCloseExpanded = function () {
@@ -230,6 +238,7 @@
 			};
 
 			fn.activeOpt = function (el, changeBool) {
+
 				var item = el,
 					opt = item.find('.combobax__item-option');
 
@@ -250,7 +259,7 @@
 				e.preventDefault();
 				if (e.type != 'keydown' || e.which === 13 || e.which === 32) {
 					if (!config.prop.disabled) {
-						fn.toggleExpandCbo();
+						fn.toggleExpandedCbo();
 					}
 				}
 			});
@@ -262,7 +271,7 @@
 				mousedown: function () {
 					var $this = $(this);
 					fn.activeOpt($this);
-					fn.toggleExpandCbo('close');
+					fn.toggleExpandedCbo('close');
 				}
 			});
 			dom.optsEnabled.on('keydown', function (e) {
@@ -272,36 +281,36 @@
 					e.preventDefault();
 
 					dom.trigger.focus();
-					fn.toggleExpandCbo('close');
+					fn.toggleExpandedCbo('close');
 				} else if (e.which >= 37 && e.which <= 40) {
 					e.preventDefault();
 
-					var thisOpt = $this.parent('.combobax__item'),
-						thisOptIdx = dom.itemsEnabled.index(thisOpt),
-						controlsOpt,
-						allOptLen = dom.itemsEnabled.length,
+					var thisItem = $this.parent('.combobax__item'),
+						thisItemIdx = dom.itemsEnabled.index(thisItem),
+						itemsLen = dom.itemsEnabled.length,
+						targetItem,
 						listboxHeight = dom.listbox.height(),
 						listboxOffsetTop = dom.listbox.offset().top + parseInt(dom.listbox.css('border-top-width')),
 						listboxScrollTop = dom.listbox.scrollTop();
 
 					if (e.which >= 37 && e.which <= 38) {
-						if (thisOptIdx == 0) controlsOpt = dom.itemsEnabled.last();
-						else controlsOpt = dom.itemsEnabled.eq(thisOptIdx - 1);
+						if (thisItemIdx == 0) targetItem = dom.itemsEnabled.last();
+						else targetItem = dom.itemsEnabled.eq(thisItemIdx - 1);
 					} else if (e.which >= 39 && e.which <= 40) {
-						if (thisOptIdx == (allOptLen - 1)) controlsOpt = dom.itemsEnabled.first();
-						else controlsOpt = dom.itemsEnabled.eq(thisOptIdx + 1);
+						if (thisItemIdx == (itemsLen - 1)) targetItem = dom.itemsEnabled.first();
+						else targetItem = dom.itemsEnabled.eq(thisItemIdx + 1);
 					}
 
-					var controlsOptHeight = controlsOpt.height(),
-						controlsOptOffsetTop = controlsOpt.offset().top - listboxOffsetTop + listboxScrollTop;
+					var targetItemHeight = targetItem.height(),
+						targetItemOffsetTop = targetItem.offset().top - listboxOffsetTop + listboxScrollTop;
 
 					setTimeout(function () {
-						fn.activeOpt(controlsOpt);
+						fn.activeOpt(targetItem);
 
-						if (controlsOptOffsetTop >= (listboxHeight + listboxScrollTop)) {
-							dom.listbox.scrollTop(controlsOptOffsetTop - (listboxHeight - controlsOptHeight));
-						} else if (controlsOptOffsetTop < listboxScrollTop) {
-							dom.listbox.scrollTop(controlsOptOffsetTop);
+						if (targetItemOffsetTop >= (listboxHeight + listboxScrollTop)) {
+							dom.listbox.scrollTop(targetItemOffsetTop - (listboxHeight - targetItemHeight));
+						} else if (targetItemOffsetTop < listboxScrollTop) {
+							dom.listbox.scrollTop(targetItemOffsetTop);
 						}
 					}, 0);
 				}

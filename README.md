@@ -77,7 +77,7 @@ $('.example').combobAx({
 ```
 
 ```html
-<button class="combobax__trigger" type="button" aria-controls="@@@@@@@@@@" aria-label="다른 옵션 선택" aria-expanded="false" value="A">
+<button class="combobax__trigger" type="button" aria-controls="COMBOBAX1" aria-label="다른 옵션 선택" aria-expanded="false" value="A">
 	<span class="combobax__trigger-txt">Option A</span>
 	<span class="combobax__trigger-bu" aria-hidden="true">▼</span>
 </button>
@@ -97,7 +97,7 @@ $('.example').combobAx({
 ```
 
 ```html
-<button class="combobax__trigger" type="button" aria-controls="@@@@@@@@@@" aria-label="Select another option" aria-expanded="false" value="A">
+<button class="combobax__trigger" type="button" aria-controls="COMBOBAX1" aria-label="Select another option" aria-expanded="false" value="A">
 	<span class="combobax__trigger-txt">Option A</span>
 	<span class="combobax-btn-bu" aria-hidden="true"><small class="bullet-example">▼</small></span>
 </button>
