@@ -18,7 +18,7 @@
 			<mark style="font-size: 1.5em;">A</mark>
 			x
 		</h1>
-		<p>Created by <strong>Gyumin Choi</strong></p>
+		<p><a href="https://github.com/choi4450/combobAx">https://github.com/choi4450/combobAx</a></p>
 	</div>
 
 	<div class="container">
@@ -26,7 +26,7 @@
 			<h2>Basic</h2>
 
 			<h3>&lt;Select&gt; tag</h3>
-			<select id="f-cbo1" name="example-basic_default" title="Example of Use attribute" aria-label="Example of Use attribute" style="width:250px">
+			<select id="f-cbo1" name="example-basic-system" title="Example of Use attribute" aria-label="Example of Use attribute" style="width:250px">
 				<option value="A">Option A</option>
 				<option value="B">Option B</option>
 				<option value="C">Option C</option>
@@ -40,7 +40,7 @@
 			</select>
 
 			<h3>with <strong>combobAx</strong></h3>
-			<select id="f-cbo2" name="example-basic_custom" title="Example of Use attribute" aria-label="Example of Use attribute" style="width:250px" class="example-cbo" data-combobax="bullet: '▼'">
+			<select class="cbo-example" id="f-cbo2" name="example-basic-custom" title="Example of Use attribute" aria-label="Example of Use attribute" style="width:250px" data-combobax>
 				<option value="A">Option A</option>
 				<option value="B">Option B</option>
 				<option value="C">Option C</option>
@@ -56,7 +56,7 @@
 			<h2>Option Group</h2>
 
 			<h3>&lt;Select&gt; tag</h3>
-			<select id="f-cbo3" name="example-optgroup_default" title="Example of Option group" aria-label="Example of Option group" style="width:250px">
+			<select id="f-cbo3" name="example-optgroup-system" title="Example of Option group" aria-label="Example of Option group" style="width:250px">
 				<optgroup label="Group A">
 					<option value="A">Option A</option>
 					<option value="B">Option B</option>
@@ -74,7 +74,7 @@
 			</select>
 
 			<h3>with <strong>combobAx</strong></h3>
-			<select id="f-cbo4" name="example-optgroup_custom" title="Example of Option group" aria-label="Example of Option group" style="width:250px" class="example-cbo_script">
+			<select class="cbo-example-script" id="f-cbo4" name="example-optgroup-custom" title="Example of Option group" aria-label="Example of Option group" style="width:250px">
 				<optgroup label="Group A">
 					<option value="A">Option A</option>
 					<option value="B">Option B</option>
@@ -94,7 +94,7 @@
 			<h2>Disabled</h2>
 
 			<h3>&lt;Select&gt; tag</h3>
-			<select id="f-cbo5" name="example-disabled_default" title="Example of Disabled" aria-label="Example of Disabled" style="width:250px" disabled>
+			<select id="f-cbo5" name="example-disabled-default" title="Example of Disabled" aria-label="Example of Disabled" style="width:250px" disabled>
 				<option value="A">Option A</option>
 				<option value="B">Option B</option>
 				<option value="C">Option C</option>
@@ -108,7 +108,7 @@
 			</select>
 
 			<h3>with <strong>combobAx</strong></h3>
-			<select id="f-cbo6" name="example-disabled_custom" title="Example of Disabled" aria-label="Example of Disabled" style="width:250px" disabled class="example-cbo_script">
+			<select class="cbo-example-script" id="f-cbo6" name="example-disabled-custom" title="Example of Disabled" aria-label="Example of Disabled" style="width:250px" disabled>
 				<option value="A">Option A</option>
 				<option value="B">Option B</option>
 				<option value="C">Option C</option>
@@ -123,7 +123,7 @@
 
 			<?php
 			if ($_GET) {
-			echo "<p style=\"margin: 20px 0;font-size: 14px;\">Result: ['{$_GET['example-basic_default']}', '{$_GET['example-basic_custom']}', '{$_GET['example-optgroup_default']}', '{$_GET['example-optgroup_custom']}', '{$_GET['example-disabled_default']}', '{$_GET['example-disabled_custom']}']</p>";
+			echo "<p style=\"margin: 20px 0;font-size: 14px;\">Result: ['{$_GET['example-basic-system']}', '{$_GET['example-basic-custom']}', '{$_GET['example-optgroup-system']}', '{$_GET['example-optgroup-custom']}', '{$_GET['example-disabled-default']}', '{$_GET['example-disabled-custom']}']</p>";
 			}
 			?>
 
@@ -134,9 +134,7 @@
 </div>
 
 <script>
-	$('.example-cbo_script').combobAx({
-		bullet: '▼'
-	});
+	$('.cbo-example-script').combobAx();
 </script>
 
 </body>

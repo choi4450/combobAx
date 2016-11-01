@@ -10,10 +10,8 @@
 (function ($) {
 
 	$.fn.combobAxConfig = {
-		// triggerHtml: '',
-		// itemHtml: '',
 		label: 'Select another option',
-		bullet: '',
+		bullet: '▼',
 		animateType: 'fade',
 		animateDuration: 200
 	};
@@ -91,8 +89,8 @@
 				attrObj.box.classname = 'class="combobax';	// attrObj.box.classname = fn.setAttrInHtmlStr('class', 'combobax');
 				attrObj.box.classname += config.prop.disabled ? ' combobax--disabled' : '';	// attrObj.box.classname = fn.addAttrInHtmlStr('class', config.prop.disabled ? 'combobax--disabled' : '', attrObj.box.classname);
 				attrObj.box.classname += config.attr.classname != '' ? ' ' + config.attr.classname + '"' : '"';	// attrObj.box.classname = fn.addAttrInHtmlStr('class', config.attr.classname != '' ? config.attr.classname : '', attrObj.box.classname);
-				attrObj.box.id = config.attr.id != '' ? 'id="' + config.attr.id + '"' : '';	// attrObj.box.id = fn.setAttrInHtmlStr('id', config.attr.id);
 				attrObj.trigger = {};
+				attrObj.trigger.id = config.attr.id != '' ? 'id="' + config.attr.id + '"' : '';	// attrObj.trigger.id = fn.setAttrInHtmlStr('id', config.attr.id);
 				attrObj.trigger.title = config.attr.title != '' ? 'title="' + config.attr.title + '"' : '';	// attrObj.trigger.title = fn.setAttrInHtmlStr('title', config.attr.title);
 				attrObj.trigger.label = 'aria-label="' + config.label + '"';	// attrObj.trigger.label = fn.setAttrInHtmlStr('aria-label', config.label);
 				attrObj.trigger.disabled = config.prop.disabled ? 'disabled tabindex="-1"' : '';
@@ -129,9 +127,10 @@
 				};
 
 				var replaceHtmlStr =
-					'<span ' + attrObj.box.classname + ' ' + attrObj.box.id + ' style="width: ' + config.style.width + 'px;">' +
-					'<button class="combobax__trigger" type="button" aria-controls="@@@@@@@@@@" ' + attrObj.trigger.title + ' ' + attrObj.trigger.label + ' ' + attrObj.trigger.disabled + ' aria-expanded="false" ' + attrObj.opt.disabled + ' value="A">' +
+					'<span ' + attrObj.box.classname + ' style="width: ' + config.style.width + 'px;">' +
+					'<button class="combobax__trigger" ' + attrObj.trigger.id + ' type="button" aria-controls="@@@@@@@@@@" ' + attrObj.trigger.title + ' ' + attrObj.trigger.label + ' ' + attrObj.trigger.disabled + ' aria-expanded="false" ' + attrObj.opt.disabled + ' value="A">' +
 					'<span class="combobax__trigger-txt">' + config.selected.txt + '</span>' +
+					'<span class="combobax__trigger-bu" aria-hidden="true">' + config.bullet + '</span>' +
 					'</button>' +
 					'<span class="combobax__listbox" role="group" aria-label="Options" id="@@@@@@@@@@" aria-hidden="true"' + (config.animateType !== 'css' ? ' style="display: none;"' : '') + '>';
 
