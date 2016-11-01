@@ -18,7 +18,7 @@
 ## 기능
 
 - &lt;select&gt;엘리먼트를 쉽게 디자인을 커스터마이징할 수 있는 HTML 구조로 변경.
-- &lt;option&gt;엘리먼트를 &lt;li&gt;, 콤보박스를 &lt;input type="radio"&gt;엘리먼트로 표현함으로써 웹접근성 준수. (&lt;input type="radio"&gt;엘리먼트의 접근성을 해치지 않는 선에서 기존의 콤보박스와 유사한 키보드 접근성 제공)
+- 콤보박스를 &lt;input type="radio"&gt;엘리먼트로 표현함으로써 웹접근성 준수. (&lt;input type="radio"&gt;엘리먼트의 접근성을 해치지 않는 선에서 기존의 콤보박스와 유사한 키보드 접근성 제공)
 - form 컨트롤 가능
 
 ## 사용 방법
