@@ -40,65 +40,64 @@
 			config.selected.opt = dom.cbo.find('option:selected');
 			config.selected.txt = config.selected.opt.text();
 
-			fn.getRegexForDetectAttrInHtmlStr = function (attr) {
-				return new RegExp("((" + attr + ")[\s]*=[\s]*([\"\']{1}))([\s]*|[\s\w]*[\s]*.*?[\s]*|[\s]+[\s\w]*)([\"\']{1})", "i");
-			};
+			// fn.getRegexForDetectAttrInHtmlStr = function (attr) {
+			// 	return new RegExp("((" + attr + ")[\s]*=[\s]*([\"\']{1}))([\s]*|[\s\w]*[\s]*.*?[\s]*|[\s]+[\s\w]*)([\"\']{1})", "i");
+			// };
 
-			fn.setAttrInHtmlStr = function (attr, val, str) {
-				val = '' + val;
-				var ret = '',
-					regex;
-				if (str) {
-					regex = fn.getRegexForDetectAttrInHtmlStr(attr);
-					// console.log('str: ', str);
-					// console.log('attr: ', attr);
-					// console.log('regex.test(str): ', regex.test(str));
-					// console.log('val: ', val);
-					// console.log('!!val: ', !!val);
-				}
-				if (str && regex.test(str)) ret = str.replace(regex, '$2=$3' + val + '$5');
-				else ret = attr + '="' + val + '"';
-				// console.log('ret: ', ret);
-				// console.log('');
-				return ret;
-			};
+			// fn.setAttrInHtmlStr = function (attr, val, str) {
+			// 	val = '' + val;
+			// 	var ret = '',
+			// 		regex;
+			// 	if (str) {
+			// 		regex = fn.getRegexForDetectAttrInHtmlStr(attr);
+			// 		// console.log('str: ', str);
+			// 		// console.log('attr: ', attr);
+			// 		// console.log('regex.test(str): ', regex.test(str));
+			// 		// console.log('val: ', val);
+			// 		// console.log('!!val: ', !!val);
+			// 	}
+			// 	if (str && regex.test(str)) ret = str.replace(regex, '$2=$3' + val + '$5');
+			// 	else ret = attr + '="' + val + '"';
+			// 	// console.log('ret: ', ret);
+			// 	// console.log('');
+			// 	return ret;
+			// };
 
-			fn.addAttrInHtmlStr = function (attr, val, str) {
-				val = '' + val;
-				var ret = str,
-					regex;
-				if (!!val) {
-					regex = fn.getRegexForDetectAttrInHtmlStr(attr);
-					// console.log('str: ', str);
-					// console.log('attr: ', attr);
-					// console.log('regex.test(str): ', regex.test(str));
-					// console.log('val: ', val);
-					// console.log('!!val: ', !!val);
-					// console.log('regex.test(str) && !!val:', regex.test(str) && !!val);
-					if (regex.test(str) && !!val) ret = str.replace(regex, '$2=$3$4 ' + val + '$5');
-				}
-				// console.log('ret: ', ret);
-				// console.log('');
-				return ret;
-			};
+			// fn.addAttrInHtmlStr = function (attr, val, str) {
+			// 	val = '' + val;
+			// 	var ret = str,
+			// 		regex;
+			// 	if (!!val) {
+			// 		regex = fn.getRegexForDetectAttrInHtmlStr(attr);
+			// 		// console.log('str: ', str);
+			// 		// console.log('attr: ', attr);
+			// 		// console.log('regex.test(str): ', regex.test(str));
+			// 		// console.log('val: ', val);
+			// 		// console.log('!!val: ', !!val);
+			// 		// console.log('regex.test(str) && !!val:', regex.test(str) && !!val);
+			// 		if (regex.test(str) && !!val) ret = str.replace(regex, '$2=$3$4 ' + val + '$5');
+			// 	}
+			// 	// console.log('ret: ', ret);
+			// 	// console.log('');
+			// 	return ret;
+			// };
 
 			// fn.removeAttrInHtmlStr = function (attr, val, str) {
 			// };
 
 			fn.replaceCbo = function () {
-
 				var attrObj = {};
 				attrObj.box = {};
-				attrObj.box.classname = fn.setAttrInHtmlStr('class', 'combobax');
-				attrObj.box.classname = fn.addAttrInHtmlStr('class', config.prop.disabled ? 'combobax--disabled' : '', attrObj.box.classname);
-				attrObj.box.classname = fn.addAttrInHtmlStr('class', config.attr.classname != '' ? config.attr.classname : '', attrObj.box.classname);
-				attrObj.box.id = fn.setAttrInHtmlStr('id', config.attr.id);
+				attrObj.box.classname = 'class="combobax';	// attrObj.box.classname = fn.setAttrInHtmlStr('class', 'combobax');
+				attrObj.box.classname += config.prop.disabled ? ' combobax--disabled' : '';	// attrObj.box.classname = fn.addAttrInHtmlStr('class', config.prop.disabled ? 'combobax--disabled' : '', attrObj.box.classname);
+				attrObj.box.classname += config.attr.classname != '' ? ' ' + config.attr.classname + '"' : '"';	// attrObj.box.classname = fn.addAttrInHtmlStr('class', config.attr.classname != '' ? config.attr.classname : '', attrObj.box.classname);
+				attrObj.box.id = config.attr.id != '' ? 'id="' + config.attr.id + '"' : '';	// attrObj.box.id = fn.setAttrInHtmlStr('id', config.attr.id);
 				attrObj.trigger = {};
-				attrObj.trigger.title = fn.setAttrInHtmlStr('title', config.attr.title);
-				attrObj.trigger.label = fn.setAttrInHtmlStr('aria-label', config.label);
+				attrObj.trigger.title = config.attr.title != '' ? 'title="' + config.attr.title + '"' : '';	// attrObj.trigger.title = fn.setAttrInHtmlStr('title', config.attr.title);
+				attrObj.trigger.label = 'aria-label="' + config.label + '"';	// attrObj.trigger.label = fn.setAttrInHtmlStr('aria-label', config.label);
 				attrObj.trigger.disabled = config.prop.disabled ? 'disabled tabindex="-1"' : '';
 				attrObj.opt = {};
-				attrObj.opt.name = fn.setAttrInHtmlStr('name', config.attr.name);
+				attrObj.opt.name = config.attr.name != '' ? 'name="' + config.attr.name + '"' : '';	// attrObj.opt.name = fn.setAttrInHtmlStr('name', config.attr.name);
 				attrObj.opt.required = config.prop.required ? 'required' : '';
 				attrObj.opt.disabled = config.prop.disabled ? 'disabled' : '';
 
