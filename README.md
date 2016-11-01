@@ -39,7 +39,7 @@
 
 #### JavaScript
 
-```javascript
+```js
 $('.example').each(function() {
     $(this).combobAx({
         label: '다른 옵션 선택'
@@ -54,7 +54,7 @@ $('.example').combobAx({
 
 ### Initialize
 
-```javascript
+```js
 {
 	label: 'Select another option',
 	bullet: '▼', 
@@ -112,12 +112,27 @@ $('.example').combobAx({
 
 > Value
 > - fade
-> - css (combobax--fadein · combobax--fadeout 클래스 제공, 사용자가 직접 컨트롤)
+> - css (combobax--animate 클래스 추가 제공, 사용자가 직접 컨트롤)
 
 ```js
 {
     label: 'fade'
 }
+```
+##### `animateType: 'css'`
+
+```js
+// Javascript
+{
+    label: 'css'
+}
+```
+
+```css
+/* CSS */
+.combobax__listbox{display:none;opacity:0;-webkit-transition:opacity .2s;transition:opacity .2s}
+.combobax--expanded .combobax__listbox{display:block}
+.combobax--animate .combobax__listbox{opacity:1}
 ```
 
 #### animateDuration

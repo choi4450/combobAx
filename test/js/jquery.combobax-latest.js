@@ -177,18 +177,17 @@
 							dom.trigger.attr('aria-expanded', 'true');
 							dom.listbox.attr('aria-hidden', 'false');
 							dom.cbo.addClass('combobax--expanded');
-							switch (config.animateType) {
-								case 'css':
-									dom.cbo.addClass('combobax--fadein');
-									setTimeout(function () {
-										dom.cbo.removeClass('combobax--fadein');
-									}, config.animateDuration);
-									break;
-								case 'fade':
-								default:
-									dom.listbox.clearQueue().fadeIn(config.animateDuration);
-									break;
-							}
+							setTimeout(function () {
+								switch (config.animateType) {
+									case 'css':
+										dom.cbo.addClass('combobax--animate');
+										break;
+									case 'fade':
+									default:
+										dom.listbox.clearQueue().fadeIn(config.animateDuration);
+										break;
+								}
+							}, 0);
 							dom.opts.filter(':checked').focus();
 						}, 0);
 					},
@@ -196,20 +195,20 @@
 						setTimeout(function () {
 							dom.trigger.attr('aria-expanded', 'false');
 							dom.listbox.attr('aria-hidden', 'true');
-							switch (config.animateType) {
-								case 'css':
-									dom.cbo.addClass('combobax--fadeout');
-									setTimeout(function () {
-										dom.cbo.removeClass('combobax--fadeout combobax--expanded');
-									}, config.animateDuration);
-									break;
-								case 'fade':
-								default:
-									dom.listbox.clearQueue().fadeOut(config.animateDuration, function () {
-										dom.cbo.removeClass('combobax--expanded');
-									});
-									break;
-							}
+							setTimeout(function () {
+								switch (config.animateType) {
+									case 'css':
+										dom.cbo.removeClass('combobax--animate');
+										break;
+									case 'fade':
+									default:
+										dom.listbox.clearQueue().fadeOut(config.animateDuration);
+										break;
+								}
+								setTimeout(function () {
+									dom.cbo.removeClass('combobax--expanded');
+								}, config.animateDuration);
+							}, 0);
 						}, 0);
 					},
 					returnBoolChkAction = function (chk) {
