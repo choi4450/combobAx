@@ -53,16 +53,9 @@
 			// 		regex;
 			// 	if (str) {
 			// 		regex = fn.getRegexForDetectAttrInHtmlStr(attr);
-			// 		// console.log('str: ', str);
-			// 		// console.log('attr: ', attr);
-			// 		// console.log('regex.test(str): ', regex.test(str));
-			// 		// console.log('val: ', val);
-			// 		// console.log('!!val: ', !!val);
 			// 	}
 			// 	if (str && regex.test(str)) ret = str.replace(regex, '$2=$3' + val + '$5');
 			// 	else ret = attr + '="' + val + '"';
-			// 	// console.log('ret: ', ret);
-			// 	// console.log('');
 			// 	return ret;
 			// };
 
@@ -72,16 +65,8 @@
 			// 		regex;
 			// 	if (!!val) {
 			// 		regex = fn.getRegexForDetectAttrInHtmlStr(attr);
-			// 		// console.log('str: ', str);
-			// 		// console.log('attr: ', attr);
-			// 		// console.log('regex.test(str): ', regex.test(str));
-			// 		// console.log('val: ', val);
-			// 		// console.log('!!val: ', !!val);
-			// 		// console.log('regex.test(str) && !!val:', regex.test(str) && !!val);
 			// 		if (regex.test(str) && !!val) ret = str.replace(regex, '$2=$3$4 ' + val + '$5');
 			// 	}
-			// 	// console.log('ret: ', ret);
-			// 	// console.log('');
 			// 	return ret;
 			// };
 
