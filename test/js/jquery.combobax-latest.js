@@ -10,13 +10,12 @@
 (function ($) {
 
 	$.fn.combobAxConfig = {
-		//style: null,
-		//animate: false,
-		//duration: 0,
-		//easingOpen: null,
-		//easingClose: null,
+		// triggerHtml: '',
+		// itemHtml: '',
 		label: 'Select another option',
-		bullet: ''
+		bullet: '',
+		animateType: 'fade',
+		animateDuration: 200
 	};
 
 	$.fn.combobAx = function (defaults) {
@@ -39,7 +38,7 @@
 			config.prop.required = dom.cbo.prop('required');
 			config.style.width = dom.cbo.outerWidth();
 			config.selected.opt = dom.cbo.find('option:selected');
-			config.selected.optTxt = config.selected.opt.text();
+			config.selected.txt = config.selected.opt.text();
 
 			fn.getRegexForDetectAttrInHtmlStr = function (attr) {
 				return new RegExp("((" + attr + ")[\s]*=[\s]*([\"\']{1}))([\s]*|[\s\w]*[\s]*.*?[\s]*|[\s]+[\s\w]*)([\"\']{1})", "i");
@@ -58,7 +57,7 @@
 					// console.log('!!val: ', !!val);
 				}
 				if (str && regex.test(str)) ret = str.replace(regex, '$2=$3' + val + '$5');
-				else ret = ' ' + attr + '="' + val + '"';
+				else ret = attr + '="' + val + '"';
 				// console.log('ret: ', ret);
 				// console.log('');
 				return ret;
@@ -67,14 +66,17 @@
 			fn.addAttrInHtmlStr = function (attr, val, str) {
 				val = '' + val;
 				var ret = str,
+					regex;
+				if (!!val) {
 					regex = fn.getRegexForDetectAttrInHtmlStr(attr);
-				// console.log('str: ', str);
-				// console.log('attr: ', attr);
-				// console.log('regex.test(str): ', regex.test(str));
-				// console.log('val: ', val);
-				// console.log('!!val: ', !!val);
-				// console.log('regex.test(str) && !!val:', regex.test(str) && !!val);
-				if (regex.test(str) && !!val) ret = str.replace(regex, '$2=$3$4 ' + val + '$5');
+					// console.log('str: ', str);
+					// console.log('attr: ', attr);
+					// console.log('regex.test(str): ', regex.test(str));
+					// console.log('val: ', val);
+					// console.log('!!val: ', !!val);
+					// console.log('regex.test(str) && !!val:', regex.test(str) && !!val);
+					if (regex.test(str) && !!val) ret = str.replace(regex, '$2=$3$4 ' + val + '$5');
+				}
 				// console.log('ret: ', ret);
 				// console.log('');
 				return ret;
@@ -86,40 +88,41 @@
 			fn.replaceCbo = function () {
 
 				var attrObj = {};
-				attrObj.box = attrObj.btn = attrObj.opt = {};
+				attrObj.box = {};
 				attrObj.box.classname = fn.setAttrInHtmlStr('class', 'combobax');
-				attrObj.box.classname = fn.addAttrInHtmlStr('class', config.prop.disabled ? 'is-disabled' : '', attrObj.box.classname);
+				attrObj.box.classname = fn.addAttrInHtmlStr('class', config.prop.disabled ? 'combobax--disabled' : '', attrObj.box.classname);
 				attrObj.box.classname = fn.addAttrInHtmlStr('class', config.attr.classname != '' ? config.attr.classname : '', attrObj.box.classname);
 				attrObj.box.id = fn.setAttrInHtmlStr('id', config.attr.id);
-				attrObj.btn.title = fn.setAttrInHtmlStr('title', config.attr.title);
-				attrObj.btn.label = fn.setAttrInHtmlStr('aria-label', config.attr.name);
+				attrObj.trigger = {};
+				attrObj.trigger.title = fn.setAttrInHtmlStr('title', config.attr.title);
+				attrObj.trigger.label = fn.setAttrInHtmlStr('aria-label', config.label);
+				attrObj.trigger.disabled = config.prop.disabled ? 'disabled tabindex="-1"' : '';
+				attrObj.opt = {};
 				attrObj.opt.name = fn.setAttrInHtmlStr('name', config.attr.name);
-				attrObj.box.required = config.prop.required ? 'aria-required="true"' : '';
-				attrObj.opt.required = config.prop.required ? 'required="required"' : '';
-				attrObj.btn.disabled = config.prop.disabled ? 'aria-disabled="true" tabindex="-1"' : '';
-				attrObj.opt.disabled = config.prop.disabled ? 'disabled="disabled"' : '';
+				attrObj.opt.required = config.prop.required ? 'required' : '';
+				attrObj.opt.disabled = config.prop.disabled ? 'disabled' : '';
 
 				var addOptionHtmlStr = function (element) {
 					var ret = '';
 					element.each(function () {
 						var $this = $(this),
-							thisOptClassName = '',
-							thisRadioAttr = $this.val() ? 'value="' + $this.val() + '"' : '';
+							itemClassname = '',
+							optAttr = $this.val() ? 'value="' + $this.val() + '"' : '';
 
 						if ($this.prop('selected')) {
-							thisOptClassName += ' combobax__item--selected';
-							thisRadioAttr += ' checked';
+							itemClassname += ' combobax__item--selected';
+							optAttr += ' checked';
 						}
 
 						if ($this.prop('disabled')) {
-							thisOptClassName += ' combobax__item--disabled';
-							thisRadioAttr += ' disabled';
+							itemClassname += ' combobax__item--disabled';
+							optAttr += ' disabled';
 						}
 
 						ret +=
-							'<label class="combobax__item' + thisOptClassName + '">' +
-							'<input class="combobax__item-option" type="radio" ' + attrObj.opt.name + ' ' + attrObj.opt.disabled + ' ' + attrObj.opt.required + ' ' + thisRadioAttr + '>' +
-							'<span class="combobax__item-txt" role="presentation">' + $this.text() + '</span>' +
+							'<label class="combobax__item' + itemClassname + '">' +
+							'<input class="combobax__item-option" type="radio" ' + attrObj.opt.name + ' ' + attrObj.opt.disabled + ' ' + attrObj.opt.required + ' ' + optAttr + '>' +
+							'<span class="combobax__item-txt">' + $this.text() + '</span>' +
 							'</label>'
 					});
 
@@ -127,27 +130,19 @@
 				};
 
 				var replaceHtmlStr =
-					// '<span class="combobax">' +
-					// '<button class="combobax__trigger" type="button" aria-controls="field-combobax" aria-expanded="false" title="Select another option" aria-label="Select another option" value="A">' +
-					// '<span class="combobax__trigger-txt" role="presentation">Option A</span>' +
-					// '</button>' +
-					// '<span class="combobax__listbox" role="group" aria-label="Options" id="field-combobax" aria-hidden="true">'
-					//
-					'<span ' + attrObj.box.classname + +attrObj.box.id + ' role="menu" aria-live="polite" aria-relevant="all" aria-haspopup="true" aria-expanded="false" style="width: ' + config.style.width + 'px;" ' + attrObj.btn.disabled + ' ' + attrObj.box.required + '>' +
-					'<button type="button" class="combobax-btn" aria-live="off" ' + attrObj.btn.title + ' ' + attrObj.btn.label + ' ' + attrObj.btn.disabled + '>' +
-					'<span class="combobax-btn-txt">' + config.selected.optTxt + '</span>' +
-					'<span class="combobax-btn-bu" aria-hidden="true">' + config.bullet + '</span>' +
+					'<span ' + attrObj.box.classname + ' ' + attrObj.box.id + ' style="width: ' + config.style.width + 'px;">' +
+					'<button class="combobax__trigger" type="button" aria-controls="@@@@@@@@@@" ' + attrObj.trigger.title + ' ' + attrObj.trigger.label + ' ' + attrObj.trigger.disabled + ' aria-expanded="false" ' + attrObj.opt.disabled + ' value="A">' +
+					'<span class="combobax__trigger-txt">' + config.selected.txt + '</span>' +
 					'</button>' +
-					'<span class="combobax-listbox">' +
-					'<span class="combobax-listbox-wrapper" role="radiogroup" ' + attrObj.box.required + ' aria-hidden="true"  style="display: none;">';
+					'<span class="combobax__listbox" role="group" aria-label="Options" id="@@@@@@@@@@" aria-hidden="true"' + (config.animateType !== 'css' ? ' style="display: none;"' : '') + '>';
 
 				dom.cbo.find('>*').each(function () {
 					var $this = $(this);
 
 					if ($this.is('optgroup')) {
 						replaceHtmlStr +=
-							'<span class="combobax-optgroup" role="radiogroup">' +
-							'<em class="combobax-optgroup-tit">' + $this.attr('label') + '</em>' +
+							'<span class="combobax__group" role="group" aria-label="' + $this.attr('label') + '">' +
+							'<span class="combobax__group-label" aria-hidden="true">' + $this.attr('label') + '</span>' +
 							addOptionHtmlStr($this.find('option')) +
 							'</span>';
 					} else {
@@ -158,21 +153,19 @@
 
 				replaceHtmlStr +=
 					'</span>' +
-					'</span>' +
 					'</span>';
 
 				var replaceHtml = $(replaceHtmlStr);
 				dom.cbo.replaceWith(replaceHtml);
 
 				dom.cbo = replaceHtml;
-				dom.cboBtn = dom.cbo.find('.combobax-btn');
-				dom.cboBtnTxt = dom.cboBtn.find('.combobax-btn-txt');
-				dom.cboListbox = dom.cbo.find('.combobax-listbox');
-				dom.cboListboxWrapper = dom.cboListbox.find('.combobax-listbox-wrapper');
-				dom.cboOpt = dom.cboListbox.find('.combobax-opt');
-				dom.cboOptEbabled = dom.cboOpt.not('.is-disabled');
-				dom.cboOptRadio = dom.cboOpt.find('.combobax-opt-radio');
-				dom.cboOptRadioEbabled = dom.cboOptEbabled.find('.combobax-opt-radio');
+				dom.trigger = dom.cbo.find('.combobax__trigger');
+				dom.triggerTxt = dom.trigger.find('.combobax__trigger-txt');
+				dom.listbox = dom.cbo.find('.combobax__listbox');
+				dom.items = dom.listbox.find('.combobax__item');
+				dom.itemsEnabled = dom.items.not('.combobax__item--disabled');
+				dom.opts = dom.items.find('.combobax__item-option');
+				dom.optsEnabled = dom.itemsEnabled.find('.combobax__item-option');
 
 			};
 
@@ -180,15 +173,46 @@
 
 				if (typeof action == 'undefined') action = 'toggle';
 
-				var propExpanded = dom.cbo.attr('aria-expanded') === 'true',
+				var propExpanded = dom.trigger.attr('aria-expanded') === 'true',
 					setOpenExpanded = function () {
-						dom.cbo.attr('aria-expanded', 'true').addClass('is-expanded');
-						dom.cboListboxWrapper.attr('aria-hidden', 'false').show();
-						dom.cboOptRadio.filter(':checked').focus();
+						setTimeout(function () {
+							dom.trigger.attr('aria-expanded', 'true');
+							dom.listbox.attr('aria-hidden', 'false');
+							dom.cbo.addClass('combobax--expanded');
+							switch (config.animateType) {
+								case 'css':
+									dom.cbo.addClass('combobax--fadein');
+									setTimeout(function () {
+										dom.cbo.removeClass('combobax--fadein');
+									}, config.animateDuration);
+									break;
+								case 'fade':
+								default:
+									dom.listbox.clearQueue().fadeIn(config.animateDuration);
+									break;
+							}
+							dom.opts.filter(':checked').focus();
+						}, 0);
 					},
 					setCloseExpanded = function () {
-						dom.cbo.attr('aria-expanded', 'false').removeClass('is-expanded');
-						dom.cboListboxWrapper.attr('aria-hidden', 'true').hide();
+						setTimeout(function () {
+							dom.trigger.attr('aria-expanded', 'false');
+							dom.listbox.attr('aria-hidden', 'true');
+							switch (config.animateType) {
+								case 'css':
+									dom.cbo.addClass('combobax--fadeout');
+									setTimeout(function () {
+										dom.cbo.removeClass('combobax--fadeout combobax--expanded');
+									}, config.animateDuration);
+									break;
+								case 'fade':
+								default:
+									dom.listbox.clearQueue().fadeOut(config.animateDuration, function () {
+										dom.cbo.removeClass('combobax--expanded');
+									});
+									break;
+							}
+						}, 0);
 					},
 					returnBoolChkAction = function (chk) {
 						return action == 'toggle' || action == chk;
@@ -209,23 +233,23 @@
 			};
 
 			fn.activeOpt = function (el, changeBool) {
-				var thisOpt = el,
-					thisOptRadio = thisOpt.find('.combobax-opt-radio');
+				var item = el,
+					opt = item.find('.combobax__item-option');
 
 				if (typeof changeBool == 'undefined') changeBool = true;
 
-				dom.cboOpt.removeClass('is-selected');
-				thisOpt.addClass('is-selected');
+				dom.items.removeClass('combobax__item--selected');
+				item.addClass('combobax__item--selected');
 
 				if (changeBool == true) {
-					thisOptRadio.focus().prop('checked', true);
-					dom.cboBtnTxt.text(thisOptRadio.siblings('.combobax-opt-txt').text());
+					opt.focus().prop('checked', true);
+					dom.triggerTxt.text(opt.siblings('.combobax__item-txt').text());
 				}
 			};
 
 			fn.replaceCbo();
 
-			dom.cboBtn.on('click', function (e) {
+			dom.trigger.on('click', function (e) {
 				e.preventDefault();
 				if (e.type != 'keydown' || e.which === 13 || e.which === 32) {
 					if (!config.prop.disabled) {
@@ -233,7 +257,7 @@
 					}
 				}
 			});
-			dom.cboOptEbabled.on({
+			dom.itemsEnabled.on({
 				mouseover: function () {
 					var $this = $(this);
 					fn.activeOpt($this, false);
@@ -244,31 +268,31 @@
 					fn.toggleExpandCbo('close');
 				}
 			});
-			dom.cboOptRadioEbabled.on('keydown', function (e) {
+			dom.optsEnabled.on('keydown', function (e) {
 				var $this = $(this);
 
 				if (e.which === 9 || e.which === 13) {
 					e.preventDefault();
 
-					dom.cboBtn.focus();
+					dom.trigger.focus();
 					fn.toggleExpandCbo('close');
 				} else if (e.which >= 37 && e.which <= 40) {
 					e.preventDefault();
 
-					var thisOpt = $this.parent('.combobax-opt'),
-						thisOptIdx = dom.cboOptEbabled.index(thisOpt),
+					var thisOpt = $this.parent('.combobax__item'),
+						thisOptIdx = dom.itemsEnabled.index(thisOpt),
 						controlsOpt,
-						allOptLen = dom.cboOptEbabled.length,
-						listboxHeight = dom.cboListbox.height(),
-						listboxOffsetTop = dom.cboListbox.offset().top + parseInt(dom.cboListbox.css('border-top-width')),
-						listboxScrollTop = dom.cboListbox.scrollTop();
+						allOptLen = dom.itemsEnabled.length,
+						listboxHeight = dom.listbox.height(),
+						listboxOffsetTop = dom.listbox.offset().top + parseInt(dom.listbox.css('border-top-width')),
+						listboxScrollTop = dom.listbox.scrollTop();
 
 					if (e.which >= 37 && e.which <= 38) {
-						if (thisOptIdx == 0) controlsOpt = dom.cboOptEbabled.last();
-						else controlsOpt = dom.cboOptEbabled.eq(thisOptIdx - 1);
+						if (thisOptIdx == 0) controlsOpt = dom.itemsEnabled.last();
+						else controlsOpt = dom.itemsEnabled.eq(thisOptIdx - 1);
 					} else if (e.which >= 39 && e.which <= 40) {
-						if (thisOptIdx == (allOptLen - 1)) controlsOpt = dom.cboOptEbabled.first();
-						else controlsOpt = dom.cboOptEbabled.eq(thisOptIdx + 1);
+						if (thisOptIdx == (allOptLen - 1)) controlsOpt = dom.itemsEnabled.first();
+						else controlsOpt = dom.itemsEnabled.eq(thisOptIdx + 1);
 					}
 
 					var controlsOptHeight = controlsOpt.height(),
@@ -278,9 +302,9 @@
 						fn.activeOpt(controlsOpt);
 
 						if (controlsOptOffsetTop >= (listboxHeight + listboxScrollTop)) {
-							dom.cboListbox.scrollTop(controlsOptOffsetTop - (listboxHeight - controlsOptHeight));
+							dom.listbox.scrollTop(controlsOptOffsetTop - (listboxHeight - controlsOptHeight));
 						} else if (controlsOptOffsetTop < listboxScrollTop) {
-							dom.cboListbox.scrollTop(controlsOptOffsetTop);
+							dom.listbox.scrollTop(controlsOptOffsetTop);
 						}
 					}, 0);
 				}

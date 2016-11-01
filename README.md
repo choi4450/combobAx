@@ -3,13 +3,15 @@
 > 모든 사용자를 위한 제이쿼리 커스텀 콤보박스 플러그인
 
 - Current version: 0.1.2
-- Release: 2016. 08. 04 ~
+- Release: 2016. 11. 01 ~
 
 ## 데모
 
 <a target="_blank" href="http://www.choigyumin.com/_view/combobAx/">http:&#47;&#47;www.choigyumin.com&#47;_view&#47;combobAx&#47;</a>
 
 ## 다운로드
+
+> jQuery 1.4+를 필요로 합니다.
 
 <a target="_blank" href="https://github.com/choi4450/combobAx/tree/master/dist">https:&#47;&#47;github.com&#47;choi4450&#47;combobAx&#47;tree&#47;master&#47;dist</a>
 
