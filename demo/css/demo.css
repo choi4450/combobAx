@@ -51,7 +51,7 @@ table{border-collapse:collapse;border-spacing:0;word-break:break-all}
 .combobax__group .combobax__item{text-indent:16px}
 .combobax--disabled .combobax__trigger{border-color:#e0e0e0!important;background:#fbfbfb;color:#999;cursor:default}
 .combobax--disabled .combobax__trigger-bu{opacity:.5;-ms-filter:alpha(opacity=50);filter:alpha(opacity=50)}
-.combobax__trigger:hover,.combobax__trigger:focus,.combobax--expanded .combobax__trigger{border-color:#aaa}
+.combobax__trigger:hover,.combobax__trigger:focus,.combobax--expanded .combobax__trigger{border-color:#6af}
 .combobax__trigger:hover .combobax__trigger-bu,.combobax__trigger:focus .combobax__trigger-bu,.combobax--expanded .combobax__trigger .combobax__trigger-bu{color:#3a3a3a}
 .combobax--expanded{position:relative;z-index:16400000}
 /*.combobax__listbox{display:none;opacity:0;filter:alpha(opacity=0);-webkit-transition:opacity .2s;transition:opacity .2s}*/ /*animateType: 'css'*/
