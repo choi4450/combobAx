@@ -1,9 +1,8 @@
 # combobAx
 
-> 모든 환경, 모든 사용자를 위한 제이쿼리 커스텀 콤보박스 플러그인
+> Form 데이터를 받을 수 있는 가벼운 jQuery 커스텀 콤보박스 플러그인
 
-- Current version: 0.1.2
-- Release: 2016. 11. 01 ~
+- Current version: 0.1.3
 
 ## 데모
 
